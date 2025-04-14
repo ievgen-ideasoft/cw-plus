@@ -224,10 +224,13 @@ report:
     # Report on schema generation
     - echo "<div class='section'><h2>Schema Generation</h2>" >> public/index.html
     - echo "<p>Schema files were generated for the following contracts:</p><ul>" >> public/index.html
-    - find ./schema-output -mindepth 1 -type d | while read dir; do
-        contract=$(basename "$dir")
-        count=$(find "$dir" -type f | wc -l)
-        echo "<li>$contract - $count schema files</li>" >> public/index.html
+    - |
+      for dir in $(find ./schema-output -mindepth 1 -type d 2>/dev/null || echo ""); do
+        if [ -n "$dir" ]; then
+          contract=$(basename "$dir")
+          count=$(find "$dir" -type f | wc -l)
+          echo "<li>$contract - $count schema files</li>" >> public/index.html
+        fi
       done
     - echo "</ul></div>" >> public/index.html
     
