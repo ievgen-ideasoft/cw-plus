@@ -1,0 +1,11 @@
+# Configure clippy for CosmWasm development
+too-many-arguments-threshold = 8
+type-complexity-threshold = 500
+avoid-breaking-exported-api = true
+disallowed-methods = [
+    { path = "std::env::var", reason = "Not available in WASM compilation" },
+    { path = "std::fs", reason = "Not available in WASM compilation" },
+    { path = "std::net", reason = "Not available in WASM compilation" },
+    { path = "std::process", reason = "Not available in WASM compilation" },
+    { path = "std::thread", reason = "Not available in WASM compilation" },
+]
