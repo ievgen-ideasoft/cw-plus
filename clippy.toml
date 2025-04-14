@@ -10,5 +10,5 @@ disallowed-methods = [
     { path = "std::thread", reason = "Not available in WASM compilation" },
 ]
 
-# Allow specific patterns that are common in CosmWasm
-manual-div-ceil = { level = "allow" }
+# Note: We can't allow specific lints in clippy.toml
+# Instead, we'll use command-line flags and attribute annotations
