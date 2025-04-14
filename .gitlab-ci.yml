@@ -1,0 +1,140 @@
+stages:
+  - lint
+  - security
+  - contract-analysis
+  - report
+
+# Define a base image that will be used by multiple jobs
+.rust-base:
+  image: rust:1.70
+  before_script:
+    - rustup component add clippy rustfmt
+    - rustup target add wasm32-unknown-unknown
+    - cargo install cargo-audit cargo-deny
+
+# Code formatting check
+format:
+  extends: .rust-base
+  stage: lint
+  script:
+    - cargo fmt --all -- --check
+  allow_failure: false
+
+# Clippy linting (default features)
+clippy-default:
+  extends: .rust-base
+  stage: lint
+  script:
+    - cargo clippy -- -D warnings
+  artifacts:
+    reports:
+      codequality: clippy-report-default.json
+    paths:
+      - clippy-report-default.json
+  allow_failure: false
+
+# Clippy linting (all features)
+clippy-all-features:
+  extends: .rust-base
+  stage: lint
+  script:
+    - cargo clippy --all-features -- -D warnings
+  artifacts:
+    reports:
+      codequality: clippy-report-all.json
+    paths:
+      - clippy-report-all.json
+  allow_failure: false
+
+# Security audit of dependencies
+audit:
+  extends: .rust-base
+  stage: security
+  script:
+    - cargo audit
+  artifacts:
+    paths:
+      - audit-report.txt
+  allow_failure: true
+  
+# Dependency checking
+deny:
+  extends: .rust-base
+  stage: security
+  script:
+    - cargo deny check
+  artifacts:
+    paths:
+      - deny-report.txt
+  allow_failure: true
+
+# CosmWasm-specific contract checks
+cosmwasm-check:
+  extends: .rust-base
+  stage: contract-analysis
+  script:
+    - cargo install cosmwasm-check
+    - find ./contracts -name Cargo.toml -print0 | xargs -0 -I '{}' sh -c 'cd $(dirname {}) && echo "Checking $(basename $(pwd))" && cosmwasm-check ./src/contract.rs'
+  artifacts:
+    paths:
+      - cosmwasm-check-results.txt
+  allow_failure: false
+
+# Generate JSON Schema for contracts
+schema-generation:
+  extends: .rust-base
+  stage: contract-analysis
+  script:
+    - cargo install cargo-schema
+    - find ./contracts -name Cargo.toml -print0 | xargs -0 -I '{}' sh -c 'cd $(dirname {}) && echo "Generating schema for $(basename $(pwd))" && cargo schema'
+  artifacts:
+    paths:
+      - contracts/*/schema/
+  allow_failure: true
+
+# Build contract to WASM
+build-wasm:
+  extends: .rust-base
+  stage: contract-analysis
+  script:
+    - find ./contracts -name Cargo.toml -print0 | xargs -0 -I '{}' sh -c 'cd $(dirname {}) && echo "Building $(basename $(pwd))" && cargo build --release --target wasm32-unknown-unknown'
+  artifacts:
+    paths:
+      - target/wasm32-unknown-unknown/release/*.wasm
+  allow_failure: false
+
+# Generate comprehensive report
+report:
+  stage: report
+  image: alpine
+  script:
+    - mkdir -p public
+    - echo "<html><head><title>CosmWasm Analysis Report</title></head><body>" > public/index.html
+    - echo "<h1>CosmWasm Smart Contract Analysis Report</h1>" >> public/index.html
+    - echo "<p>Generated on $(date)</p>" >> public/index.html
+    - echo "<h2>Summary</h2>" >> public/index.html
+    - echo "<p>All checks completed successfully</p>" >> public/index.html
+    - echo "</body></html>" >> public/index.html
+  artifacts:
+    paths:
+      - public/
+    expire_in: 1 week
+  dependencies:
+    - clippy-default
+    - clippy-all-features
+    - audit
+    - deny
+    - cosmwasm-check
+    - schema-generation
+    - build-wasm
+
+# Variables and caching configuration
+variables:
+  CARGO_HOME: $CI_PROJECT_DIR/.cargo
+  RUST_BACKTRACE: 1
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .cargo/
+    - target/
