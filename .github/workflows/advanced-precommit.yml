@@ -1,0 +1,115 @@
+name: Advanced Pre-commit Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main, master, develop]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: 1.84.0
+          components: clippy, rustfmt
+          target: wasm32-unknown-unknown
+          override: true
+      
+      - name: Cache Rust dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      
+      - name: Install pre-commit
+        run: pip install pre-commit
+      
+      - name: Cache pre-commit environments
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: ${{ runner.os }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+      
+      - name: Run pre-commit
+        id: precommit
+        run: |
+          # For pull requests, only check files that changed
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | xargs pre-commit run --files
+          else
+            pre-commit run --all-files
+          fi
+        continue-on-error: true  # Don't fail the workflow yet
+      
+      # Create formatted output for PR comment
+      - name: Format results for PR comment
+        id: format
+        if: github.event_name == 'pull_request'
+        run: |
+          if [ ${{ steps.precommit.outcome }} == 'failure' ]; then
+            echo "::set-output name=result::❌ Pre-commit checks failed! Please fix the issues and push again."
+            echo "::set-output name=color::danger"
+          else
+            echo "::set-output name=result::✅ Pre-commit checks passed successfully!"
+            echo "::set-output name=color::success" 
+          fi
+      
+      # Add comment to PR with results
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `### Pre-commit Check Results
+            
+            ${{ steps.format.outputs.result }}
+            
+            <details>
+            <summary>View Details</summary>
+            
+            \`\`\`
+            ${{ steps.precommit.outputs.stdout || 'No output available' }}
+            \`\`\`
+            
+            </details>
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+      
+      # Run code intelligence checks for PR review suggestions
+      - name: Run reviewdog
+        if: github.event_name == 'pull_request' && steps.precommit.outcome == 'failure'
+        uses: reviewdog/action-setup@v1
+        
+      - name: Analyze with Clippy
+        if: github.event_name == 'pull_request' && steps.precommit.outcome == 'failure'
+        run: |
+          cargo clippy --all-features -- -D warnings -A clippy::manual-div-ceil 2>&1 | reviewdog -f=clippy -reporter=github-pr-review -fail-on-error=false
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      # Finally fail the workflow if pre-commit failed
+      - name: Check result
+        if: steps.precommit.outcome == 'failure'
+        run: exit 1
