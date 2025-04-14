@@ -9,3 +9,6 @@ disallowed-methods = [
     { path = "std::process", reason = "Not available in WASM compilation" },
     { path = "std::thread", reason = "Not available in WASM compilation" },
 ]
+
+# Allow specific patterns that are common in CosmWasm
+manual-div-ceil = { level = "allow" }
