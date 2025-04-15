@@ -309,3 +309,11 @@ jobs:
         run: |
           echo "✅ Comprehensive analysis completed successfully!"
           echo "Results available in reports/ and comprehensive-report/ directories"
+          
+      - name: Deploy report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: success()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./comprehensive-report
+          destination_dir: comprehensive-report

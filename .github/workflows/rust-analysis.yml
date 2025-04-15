@@ -154,3 +154,11 @@ jobs:
           
           # Print success message
           echo "Report generated successfully at analysis-report/index.html"
+          
+      - name: Deploy report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: success() && github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./analysis-report
+          destination_dir: static-analysis-report
