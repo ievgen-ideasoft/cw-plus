@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>CosmWasm Analysis Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+    h1 { color: #333; }
+    h2 { color: #555; }
+    .section { margin-bottom: 30px; }
+    pre { background: #f4f4f4; padding: 10px; overflow: auto; }
+    .warning { color: #e67e22; }
+    .error { color: #e74c3c; }
+    .success { color: #27ae60; }
+  </style>
+</head>
+<body>
+  <h1>CosmWasm Smart Contract Analysis Report</h1>
+  <p>Generated on $(date)</p>
+  
+  <div class="section">
+    <h2>Security Analysis</h2>
+    <pre>$(cat security-reports/report.md 2>/dev/null || echo "No security report generated")</pre>
+  </div>
+  
+  <div class="section">
+    <h2>Schema Generation</h2>
+    <p>Schema files were generated for the following contracts:</p>
+    <ul>
+<li>cw4-group - 1 schema files</li>
+<li>cw1-whitelist - 1 schema files</li>
+<li>cw3-flex-multisig - 1 schema files</li>
+<li>cw20-base - 1 schema files</li>
+<li>cw4-stake - 1 schema files</li>
+<li>cw1-subkeys - 1 schema files</li>
+<li>cw20-ics20 - 1 schema files</li>
+<li>cw3-fixed-multisig - 1 schema files</li>
+    </ul>
+  </div>
+  
+  <div class="section">
+    <h2>CosmWasm 2.0 Notes</h2>
+    <p>This repository uses CosmWasm 2.0 dependencies but may not have all contracts fully updated for the new QueryResponses trait requirement.</p>
+    <p>To fully support schema generation with CosmWasm 2.0, update your QueryMsg types to implement QueryResponses.</p>
+  </div>
+</body>
+</html>
