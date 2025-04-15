@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CosmWasm Comprehensive Analysis</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      background-color: #1a237e;
+      color: white;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    h2 {
+      color: #1a237e;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+      margin-top: 40px;
+    }
+    .section {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      overflow: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+    }
+    .warning { color: #ff9800; }
+    .error { color: #f44336; }
+    .success { color: #4caf50; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #f5f5f5;
+      color: #666;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>CosmWasm Comprehensive Analysis</h1>
+      <p>Generated on Tue Apr 15 06:21:35 UTC 2025</p>
+    </div>
+  </header>
+  
+  <div class="container">
+    <div class="section">
+      <h2>Analysis Summary</h2>
+      <p>This report contains a comprehensive analysis of the CosmWasm smart contracts in this repository.</p>
+    </div>
+    
+    <div class="section">
+      <h2>Code Statistics</h2>
+      <pre># CosmWasm Code Statistics
+Generated on Tue Apr 15 06:21:34 UTC 2025
+
+## Lines of Code
+| Directory | Files | Lines |
+|-----------|-------|-------|
+| contracts | 58 | 15355 |
+| packages | 29 | 2146 |
+
+## Contract Size
+| Contract | Source LOC | Files |
+|----------|------------|-------|
+| cw4-group | 852 | 8 |
+| cw1-whitelist | 639 | 7 |
+| cw3-flex-multisig | 2769 | 6 |
+| cw20-base | 3755 | 8 |
+| cw4-stake | 1213 | 6 |
+| cw1-subkeys | 2654 | 6 |
+| cw20-ics20 | 1999 | 10 |
+| cw3-fixed-multisig | 1474 | 7 |</pre>
+    </div>
+    
+    <div class="section">
+      <h2>Security Analysis</h2>
+      <pre># Security Scan Report
+Generated on Tue Apr 15 06:21:34 UTC 2025
+
+## Unwrap/Expect Usage
+- ./contracts/cw1-subkeys/src/contract.rs:615:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:636:                    execute(deps.as_mut().branch(), env, owner.clone(), msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:644:                    execute(deps.as_mut().branch(), mock_env(), owner.clone(), msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:681:            get_contract_version(&deps.storage).unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:697:                query_allowance(deps.as_ref(), mock_env(), SPENDER1.to_owned()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:706:                query_allowance(deps.as_ref(), mock_env(), SPENDER2.to_owned()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:717:                query_allowance(deps.as_ref(), mock_env(), SPENDER3.to_string()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:730:                query_allowance(deps.as_ref(), mock_env(), SPENDER1.to_owned()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:767:                .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:778:            .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:818:            let permissions = query_permissions(deps.as_ref(), SPENDER1.to_string()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:821:            let permissions = query_permissions(deps.as_ref(), SPENDER2.to_string()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:825:            let permissions = query_permissions(deps.as_ref(), SPENDER3.to_string()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:839:                .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:845:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:881:                query_admin_list(deps.as_ref()).unwrap().canonical(),
+- ./contracts/cw1-subkeys/src/contract.rs:904:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:911:                query_admin_list(deps.as_ref()).unwrap().canonical(),
+- ./contracts/cw1-subkeys/src/contract.rs:933:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:940:                query_admin_list(deps.as_ref()).unwrap().canonical(),
+- ./contracts/cw1-subkeys/src/contract.rs:965:                query_admin_list(deps.as_ref()).unwrap().canonical(),
+- ./contracts/cw1-subkeys/src/contract.rs:989:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1002:                query_admin_list(deps.as_ref()).unwrap().canonical(),
+- ./contracts/cw1-subkeys/src/contract.rs:1036:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1044:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1078:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1086:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1117:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1125:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1156:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1164:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1202:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1210:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1249:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1257:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1296:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1332:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1364:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1372:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1405:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1413:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1446:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1454:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1486:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1494:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1519:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1527:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1563:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1598:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1634:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1663:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1700:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1711:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1746:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1776:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1813:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1843:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1867:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1878:                    .unwrap()
+- ./contracts/cw1-subkeys/src/contract.rs:1902:            .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:1970:                .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2016:                .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2097:                        .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2120:                query_can_execute(deps.as_ref(), mock_env(), SPENDER1.to_owned(), msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2139:                query_can_execute(deps.as_ref(), mock_env(), SPENDER1.to_owned(), msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2165:                        .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2184:                query_can_execute(deps.as_ref(), mock_env(), SPENDER1.to_owned(), msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2214:                        .unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2257:        instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2264:        execute(deps.as_mut(), mock_env(), info.clone(), setup_perm_msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2271:        execute(deps.as_mut(), mock_env(), info.clone(), setup_allowance_msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2273:        let res_perm = query_permissions(deps.as_ref(), spender1.to_string()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2275:        let res_allow = query_allowance(deps.as_ref(), mock_env(), spender1.to_string()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2284:        execute(deps.as_mut(), mock_env(), info.clone(), setup_allowance_msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2290:        execute(deps.as_mut(), mock_env(), info, setup_perm_msg).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2292:        let res_perm = query_permissions(deps.as_ref(), spender2.to_string()).unwrap();
+- ./contracts/cw1-subkeys/src/contract.rs:2294:        let res_allow = query_allowance(deps.as_ref(), mock_env(), spender2.to_string()).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:168:        instantiate(deps.as_mut(), mock_env(), info, instantiate_msg).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:175:        assert_eq!(query_admin_list(deps.as_ref()).unwrap(), expected);
+- ./contracts/cw1-whitelist/src/contract.rs:190:        execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:197:        assert_eq!(query_admin_list(deps.as_ref()).unwrap(), expected);
+- ./contracts/cw1-whitelist/src/contract.rs:206:        execute(deps.as_mut(), mock_env(), info, ExecuteMsg::Freeze {}).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:211:        assert_eq!(query_admin_list(deps.as_ref()).unwrap(), expected);
+- ./contracts/cw1-whitelist/src/contract.rs:236:        instantiate(deps.as_mut(), mock_env(), info, instantiate_msg).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:247:                msg: to_json_binary(&freeze).unwrap(),
+- ./contracts/cw1-whitelist/src/contract.rs:263:        let res = execute(deps.as_mut(), mock_env(), info, execute_msg).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:286:        instantiate(deps.as_mut(), mock_env(), info, instantiate_msg).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:299:        let res = query_can_execute(deps.as_ref(), alice, send_msg.clone()).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:303:        let res = query_can_execute(deps.as_ref(), bob, staking_msg.clone()).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:307:        let res = query_can_execute(deps.as_ref(), anyone.to_string(), send_msg).unwrap();
+- ./contracts/cw1-whitelist/src/contract.rs:311:        let res = query_can_execute(deps.as_ref(), anyone.to_string(), staking_msg).unwrap();
+- ./contracts/cw1-whitelist/src/integration_tests.rs:58:            .unwrap();
+- ./contracts/cw1-whitelist/src/integration_tests.rs:94:            msg: to_json_binary(&msg).unwrap(),
+- ./contracts/cw1-whitelist/src/integration_tests.rs:101:    let mut suite = Suite::init().unwrap();
+- ./contracts/cw20-base/src/allowances.rs:267:        query_balance(deps, address.into()).unwrap().balance
+- ./contracts/cw20-base/src/allowances.rs:289:        instantiate(deps.branch(), env, info, instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:290:        query_token_info(deps.as_ref()).unwrap()
+- ./contracts/cw20-base/src/allowances.rs:304:        let allowance = query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:315:        execute(deps.as_mut(), env.clone(), info.clone(), msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:318:        let allowance = query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:329:        let allow2 = allow1.checked_sub(lower).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:335:        execute(deps.as_mut(), env.clone(), info.clone(), msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:336:        let allowance = query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:354:        execute(deps.as_mut(), env.clone(), info.clone(), msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:355:        let allowance = query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:370:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:371:        let allowance = query_allowance(deps.as_ref(), owner, spender).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:388:            query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:392:            query_allowance(deps.as_ref(), owner.clone(), spender2.clone()).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:396:            query_allowance(deps.as_ref(), spender.clone(), spender2.clone()).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:408:        execute(deps.as_mut(), env.clone(), info.clone(), msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:417:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:429:            query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:433:            query_allowance(deps.as_ref(), owner.clone(), spender2.clone()).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:437:            query_allowance(deps.as_ref(), spender.clone(), spender2.clone()).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:451:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:457:            query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:461:            query_allowance(deps.as_ref(), owner, spender2.clone()).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:465:            query_allowance(deps.as_ref(), spender, spender2).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:517:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:528:        let res = execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:534:            start.checked_sub(transfer).unwrap()
+- ./contracts/cw20-base/src/allowances.rs:539:        let allowance = query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:541:            allowance: allow1.checked_sub(transfer).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:565:        execute(deps.as_mut(), env.clone(), info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:598:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:608:        let res = execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:614:            start.checked_sub(transfer).unwrap()
+- ./contracts/cw20-base/src/allowances.rs:618:        let allowance = query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:620:            allowance: allow1.checked_sub(transfer).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:643:        execute(deps.as_mut(), env.clone(), info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:678:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:690:        let res = execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:701:        .unwrap();
+- ./contracts/cw20-base/src/allowances.rs:714:            start.checked_sub(transfer).unwrap()
+- ./contracts/cw20-base/src/allowances.rs:719:        let allowance = query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:721:            allowance: allow1.checked_sub(transfer).unwrap(),
+- ./contracts/cw20-base/src/allowances.rs:746:        execute(deps.as_mut(), env.clone(), info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:810:        execute(deps.as_mut(), env.clone(), info.clone(), msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:813:        let allowance = query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:831:        execute(deps.as_mut(), env.clone(), info.clone(), msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:834:        let allowance = query_allowance(deps.as_ref(), owner.clone(), spender.clone()).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:867:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/allowances.rs:870:        let allowance = query_allowance(deps.as_ref(), owner, spender).unwrap();
+- ./contracts/cw20-base/src/contract.rs:593:    if original_version < "0.14.0".parse::<semver::Version>().unwrap() {
+- ./contracts/cw20-base/src/contract.rs:616:        query_balance(deps, address.into()).unwrap().balance
+- ./contracts/cw20-base/src/contract.rs:663:        let res = instantiate(deps.branch(), env, info, instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:666:        let meta = query_token_info(deps.as_ref()).unwrap();
+- ./contracts/cw20-base/src/contract.rs:677:        assert_eq!(query_minter(deps.as_ref()).unwrap(), mint,);
+- ./contracts/cw20-base/src/contract.rs:704:            let res = instantiate(deps.as_mut(), env, info, instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:708:                query_token_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:742:            let res = instantiate(deps.as_mut(), env, info, instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:746:                query_token_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:756:                query_minter(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:819:                let res = instantiate(deps.as_mut(), env, info, instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:823:                    query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:889:        let res = execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:901:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:956:        let mint: MinterResponse = from_json(res.unwrap()).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1002:        let mint: Option<MinterResponse> = from_json(res.unwrap()).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1087:        let res = instantiate(deps.as_mut(), env, info, instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1090:            query_token_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1114:        let loaded = query_token_info(deps.as_ref()).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1125:        .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1126:        let loaded: BalanceResponse = from_json(data).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1130:        let data = query(deps.as_ref(), env, QueryMsg::Balance { address: addr2 }).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1131:        let loaded: BalanceResponse = from_json(data).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1153:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1182:        let res = execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1185:        let remainder = amount1.checked_sub(transfer).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1189:            query_token_info(deps.as_ref()).unwrap().total_supply,
+- ./contracts/cw20-base/src/contract.rs:1210:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1212:            query_token_info(deps.as_ref()).unwrap().total_supply,
+- ./contracts/cw20-base/src/contract.rs:1223:            query_token_info(deps.as_ref()).unwrap().total_supply,
+- ./contracts/cw20-base/src/contract.rs:1231:        let res = execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1234:        let remainder = amount1.checked_sub(burn).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1237:            query_token_info(deps.as_ref()).unwrap().total_supply,
+- ./contracts/cw20-base/src/contract.rs:1262:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1283:        let res = execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1294:        .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1306:        let remainder = amount1.checked_sub(transfer).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1310:            query_token_info(deps.as_ref()).unwrap().total_supply,
+- ./contracts/cw20-base/src/contract.rs:1360:                .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1373:                .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1386:                .unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1389:            app.execute(Addr::unchecked(&sender), msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1397:                    msg: to_json_binary(&MigrateMsg {}).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1400:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1411:                .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1426:                .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1464:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1482:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1520:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1532:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1537:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1575:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1587:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1592:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1630:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1642:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1647:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1685:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1697:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1702:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1741:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1753:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1758:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1796:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1816:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1854:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1866:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1871:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1909:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1917:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1922:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1960:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:1968:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:1973:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:1983:                query_download_logo(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:2013:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:2022:            .unwrap();
+- ./contracts/cw20-base/src/contract.rs:2027:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:2037:                query_download_logo(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:2067:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:2081:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:2119:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:2123:                std::str::from_utf8(&[b'x'; 6000]).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:2140:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:2178:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:2192:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/contract.rs:2230:            instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/contract.rs:2245:                query_marketing_info(deps.as_ref()).unwrap(),
+- ./contracts/cw20-base/src/enumerable.rs:107:        instantiate(deps.branch(), env, info, instantiate_msg).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:108:        query_token_info(deps.as_ref()).unwrap()
+- ./contracts/cw20-base/src/enumerable.rs:125:        let allowances = query_owner_allowances(deps.as_ref(), owner.clone(), None, None).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:136:        execute(deps.as_mut(), env.clone(), info.clone(), msg).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:145:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:148:        let allowances = query_owner_allowances(deps.as_ref(), owner.clone(), None, None).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:153:            query_owner_allowances(deps.as_ref(), owner.clone(), None, Some(1)).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:167:        .unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:195:            query_spender_allowances(deps.as_ref(), spender.clone(), None, None).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:206:        execute(deps.as_mut(), env, info, msg).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:219:        execute(deps.as_mut(), env.clone(), info, msg).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:228:            from_json(query(deps.as_ref(), env.clone(), msg).unwrap()).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:238:            from_json(query(deps.as_ref(), env.clone(), msg).unwrap()).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:252:            from_json(query(deps.as_ref(), env, msg).unwrap()).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:287:        .unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:297:        .unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:307:        .unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:310:        let accounts = query_all_accounts(deps.as_ref(), None, None).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:314:        let accounts = query_all_accounts(deps.as_ref(), None, Some(2)).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:318:            query_all_accounts(deps.as_ref(), Some(accounts.accounts[1].clone()), Some(1)).unwrap();
+- ./contracts/cw20-base/src/enumerable.rs:323:                .unwrap();
+- ./contracts/cw20-base/src/msg.rs:170:            let c = std::str::from_utf8(c).unwrap();
+- ./contracts/cw20-ics20/src/amount.rs:18:            let address = denom.get(5..).unwrap().into();
+- ./contracts/cw20-ics20/src/contract.rs:399:        let raw_list = query(deps.as_ref(), mock_env(), QueryMsg::ListChannels {}).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:400:        let list_res: ListChannelsResponse = from_json(raw_list).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:412:        .unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:413:        let chan_res: ChannelResponse = from_json(raw_channel).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:447:        let res = execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:459:            let msg: Ics20Packet = from_json(data).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:510:            msg: to_json_binary(&transfer).unwrap(),
+- ./contracts/cw20-ics20/src/contract.rs:515:        let res = execute(deps.as_mut(), mock_env(), info, msg.clone()).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:527:            let msg: Ics20Packet = from_json(data).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:560:            msg: to_json_binary(&transfer).unwrap(),
+- ./contracts/cw20-ics20/src/contract.rs:576:        .unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:579:        execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:596:        set_contract_version(deps.as_mut().storage, CONTRACT_NAME, MIGRATE_VERSION_3).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:606:            .unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:616:        .unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:619:        let chan = query_channel(deps.as_ref(), send_channel.into()).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:624:        let config = query_config(deps.as_ref()).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:645:        let res = execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:657:            let msg: Ics20Packet = from_json(data).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:690:        .unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:694:        let res = execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:702:            let msg: Ics20Packet = from_json(data).unwrap();
+- ./contracts/cw20-ics20/src/contract.rs:715:            let _msg: Ics20PacketNoMemo = from_json(data).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:80:    to_json_binary(&res).unwrap()
+- ./contracts/cw20-ics20/src/ibc.rs:86:    to_json_binary(&res).unwrap()
+- ./contracts/cw20-ics20/src/ibc.rs:390:                msg: to_json_binary(&msg).unwrap(),
+- ./contracts/cw20-ics20/src/ibc.rs:416:        let success_json = String::from_utf8(to_json_vec(&success).unwrap()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:419:        let fail_json = String::from_utf8(to_json_vec(&fail).unwrap()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:434:        let encdoded = String::from_utf8(to_json_vec(&packet).unwrap()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:450:            msg: to_json_binary(&msg).unwrap(),
+- ./contracts/cw20-ics20/src/ibc.rs:484:            to_json_binary(&data).unwrap(),
+- ./contracts/cw20-ics20/src/ibc.rs:519:        let res = ibc_packet_receive(deps.as_mut(), mock_env(), msg).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:521:        let ack: Ics20Ack = from_json(res.acknowledgement.unwrap()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:535:            msg: to_json_binary(&transfer).unwrap(),
+- ./contracts/cw20-ics20/src/ibc.rs:538:        let res = execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:553:                data: to_json_binary(&expected).unwrap(),
+- ./contracts/cw20-ics20/src/ibc.rs:559:        let state = query_channel(deps.as_ref(), send_channel.to_string()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:565:        let res = ibc_packet_receive(deps.as_mut(), mock_env(), msg).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:567:        let ack: Ics20Ack = from_json(res.acknowledgement.unwrap()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:572:        let res = ibc_packet_receive(deps.as_mut(), mock_env(), msg).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:578:        let ack: Ics20Ack = from_json(res.acknowledgement.unwrap()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:584:        let state = query_channel(deps.as_ref(), send_channel.to_string()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:602:        let res = ibc_packet_receive(deps.as_mut(), mock_env(), msg).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:604:        let ack: Ics20Ack = from_json(res.acknowledgement.unwrap()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:616:        execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:619:        let state = query_channel(deps.as_ref(), send_channel.to_string()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:625:        let res = ibc_packet_receive(deps.as_mut(), mock_env(), msg).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:627:        let ack: Ics20Ack = from_json(res.acknowledgement.unwrap()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:632:        let res = ibc_packet_receive(deps.as_mut(), mock_env(), msg).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:638:        let ack: Ics20Ack = from_json(res.acknowledgement.unwrap()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:644:        let state = query_channel(deps.as_ref(), send_channel.to_string()).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:657:        let limit = check_gas_limit(deps.as_ref(), &Amount::cw20(500, allowed)).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:673:        .unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:676:        let limit = check_gas_limit(deps.as_ref(), &Amount::cw20(500, allowed)).unwrap();
+- ./contracts/cw20-ics20/src/ibc.rs:680:        let limit = check_gas_limit(deps.as_ref(), &Amount::cw20(500, random)).unwrap();
+- ./contracts/cw20-ics20/src/test_helpers.rs:52:    ibc_channel_open(deps.branch(), mock_env(), open_msg).unwrap();
+- ./contracts/cw20-ics20/src/test_helpers.rs:54:    ibc_channel_connect(deps.branch(), mock_env(), connect_msg).unwrap();
+- ./contracts/cw20-ics20/src/test_helpers.rs:79:    let res = instantiate(deps.as_mut(), mock_env(), info, instantiate_msg).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:494:        let votes: VoteListResponse = from_json(query(deps, mock_env(), voters).unwrap()).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:552:        setup_test_case(deps.as_mut(), info, threshold, max_voting_period).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:560:            get_contract_version(&deps.storage).unwrap()
+- ./contracts/cw3-fixed-multisig/src/contract.rs:574:        setup_test_case(deps.as_mut(), info, threshold, voting_period).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:590:        let res = execute(deps.as_mut(), mock_env(), info, proposal).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:593:        let proposal_id: u64 = res.attributes[2].value.parse().unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:614:        setup_test_case(deps.as_mut(), info, threshold, voting_period).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:646:        let res = execute(deps.as_mut(), mock_env(), info, proposal.clone()).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:660:        let res = execute(deps.as_mut(), mock_env(), info, proposal).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:681:        setup_test_case(deps.as_mut(), info.clone(), threshold, voting_period).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:695:        let res = execute(deps.as_mut(), mock_env(), info.clone(), proposal).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:698:        let proposal_id: u64 = res.attributes[2].value.parse().unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:715:        let res = execute(deps.as_mut(), mock_env(), info, yes_vote.clone()).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:729:        let proposal_id: u64 = res.attributes[2].value.parse().unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:740:        execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:748:        execute(deps.as_mut(), mock_env(), info.clone(), veto_vote).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:768:        let res = execute(deps.as_mut(), mock_env(), info, yes_vote.clone()).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:782:        let res = execute(deps.as_mut(), mock_env(), info, yes_vote).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:807:        let res = execute(deps.as_mut(), mock_env(), info, proposal).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:810:        let proposal_id: u64 = res.attributes[2].value.parse().unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:819:        let res = execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:833:        let res = execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:847:        let _res = execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:851:        let res = execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:866:        let res = execute(deps.as_mut(), mock_env(), info, no_vote).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:884:        let res = execute(deps.as_mut(), mock_env(), info, yes_vote).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:905:        setup_test_case(deps.as_mut(), info.clone(), threshold, voting_period).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:919:        let res = execute(deps.as_mut(), mock_env(), info.clone(), proposal).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:922:        let proposal_id: u64 = res.attributes[2].value.parse().unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:935:        let res = execute(deps.as_mut(), mock_env(), info.clone(), vote).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:954:        let res = execute(deps.as_mut(), mock_env(), info.clone(), execution).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:983:        setup_test_case(deps.as_mut(), info.clone(), threshold, voting_period).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:997:        let res = execute(deps.as_mut(), mock_env(), info, proposal).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1000:        let proposal_id: u64 = res.attributes[2].value.parse().unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1008:        let res = execute(deps.as_mut(), mock_env(), info, vote).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1031:            .unwrap(),
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1033:        .unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1054:        .unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1073:        setup_test_case(deps.as_mut(), info.clone(), threshold, voting_period).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1087:        let res = execute(deps.as_mut(), mock_env(), info, proposal).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1090:        let proposal_id: u64 = res.attributes[2].value.parse().unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1110:        let res = execute(deps.as_mut(), mock_env(), info.clone(), proposal).unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1113:        let proposal_id: u64 = res.attributes[2].value.parse().unwrap();
+- ./contracts/cw3-fixed-multisig/src/contract.rs:1125:        .unwrap();
+- ./contracts/cw3-fixed-multisig/src/integration_tests.rs:70:        .unwrap();
+- ./contracts/cw3-fixed-multisig/src/integration_tests.rs:76:        name: "Consortium Token".parse().unwrap(),
+- ./contracts/cw3-fixed-multisig/src/integration_tests.rs:77:        symbol: "CST".parse().unwrap(),
+- ./contracts/cw3-fixed-multisig/src/integration_tests.rs:95:        .unwrap();
+- ./contracts/cw3-fixed-multisig/src/integration_tests.rs:107:        msg: to_json_binary(&cw20_mint_msg).unwrap(),
+- ./contracts/cw3-fixed-multisig/src/integration_tests.rs:119:        .unwrap();
+- ./contracts/cw3-fixed-multisig/src/integration_tests.rs:128:        .unwrap();
+- ./contracts/cw3-fixed-multisig/src/integration_tests.rs:135:        .unwrap();
+- ./contracts/cw3-fixed-multisig/src/integration_tests.rs:144:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:554:                .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:566:            .unwrap()
+- ./contracts/cw3-flex-multisig/src/contract.rs:587:            .unwrap()
+- ./contracts/cw3-flex-multisig/src/contract.rs:658:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:665:                .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:734:            err.downcast().unwrap()
+- ./contracts/cw3-flex-multisig/src/contract.rs:757:            err.downcast().unwrap()
+- ./contracts/cw3-flex-multisig/src/contract.rs:777:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:780:        let version = query_contract_info(&app.wrap(), flex_addr.clone()).unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:799:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:824:        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:845:        assert_eq!(ContractError::WrongExpiration {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:850:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:864:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:883:        let votes: VoteListResponse = app.wrap().query_wasm_smart(flex_addr, &voters).unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:938:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:939:        let proposal_id1: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:946:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:947:        let proposal_id2: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:956:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:957:        let proposal_id3: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:969:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:997:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1043:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1046:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1056:        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1062:        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1067:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1082:        assert_eq!(ContractError::AlreadyVoted {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1096:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1105:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1113:        assert_eq!(ContractError::AlreadyVoted {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1120:        assert_eq!(ContractError::Expired {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1126:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1140:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1158:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1160:            vote.vote.unwrap(),
+- ./contracts/cw3-flex-multisig/src/contract.rs:1174:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1176:            vote.vote.unwrap(),
+- ./contracts/cw3-flex-multisig/src/contract.rs:1190:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1197:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1200:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1209:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1214:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1233:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1267:        let contract_bal = app.wrap().query_balance(&flex_addr, "BTC").unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1274:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1277:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1286:            err.downcast().unwrap()
+- ./contracts/cw3-flex-multisig/src/contract.rs:1296:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1312:        assert_eq!(ContractError::WrongCloseStatus {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1322:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1333:        let some_bal = app.wrap().query_balance(SOMEBODY, "BTC").unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1335:        let contract_bal = app.wrap().query_balance(&flex_addr, "BTC").unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1342:        assert_eq!(ContractError::WrongCloseStatus {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1350:            err.downcast().unwrap()
+- ./contracts/cw3-flex-multisig/src/contract.rs:1378:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1381:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1389:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1400:        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1408:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1435:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1438:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1446:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1457:        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1467:        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1475:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1499:        let contract_bal = app.wrap().query_balance(&flex_addr, "BTC").unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1506:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1509:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1518:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1539:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1551:        assert_eq!(ContractError::WrongCloseStatus {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1561:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1596:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1599:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1606:        assert_eq!(ContractError::NotExpired {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1612:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1627:        assert_eq!(ContractError::WrongCloseStatus {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1655:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1657:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1663:                .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1674:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1694:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1703:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1716:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1718:        let proposal_id2: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1726:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1735:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1742:        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1746:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1752:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1779:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1793:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1795:        let update_proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1809:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1811:        let cash_proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1820:                .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1835:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1840:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1856:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1869:        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1878:        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+- ./contracts/cw3-flex-multisig/src/contract.rs:1907:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1909:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1915:                .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1931:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1943:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1950:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1952:        let proposal_id2: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1961:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1991:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1993:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:1999:                .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2015:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2027:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2062:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2064:        let proposal_id: u64 = res.custom_attrs(1)[2].value.parse().unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2070:                .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2082:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2092:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2134:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2162:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2198:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2224:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2229:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2240:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2251:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2260:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2271:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2282:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2295:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2300:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2311:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2324:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2335:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2346:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2375:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2388:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2394:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2407:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2418:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2424:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2439:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2448:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2475:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2481:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2490:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2493:        let balance = app.wrap().query_balance(VOTER4, "TOKEN").unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2507:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2512:            .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2525:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2536:        .unwrap();
+- ./contracts/cw3-flex-multisig/src/contract.rs:2539:        let balance = app.wrap().query_balance(OWNER, "TOKEN").unwrap();
+- ./contracts/cw4-group/src/tests.rs:35:    instantiate(deps, mock_env(), info, msg).unwrap();
+- ./contracts/cw4-group/src/tests.rs:44:    let res = ADMIN.query_admin(deps.as_ref()).unwrap();
+- ./contracts/cw4-group/src/tests.rs:47:    let res = query_total_weight(deps.as_ref(), None).unwrap();
+- ./contracts/cw4-group/src/tests.rs:56:    let member1 = query_member(deps.as_ref(), USER1.into(), None).unwrap();
+- ./contracts/cw4-group/src/tests.rs:59:    let member2 = query_member(deps.as_ref(), USER2.into(), None).unwrap();
+- ./contracts/cw4-group/src/tests.rs:62:    let member3 = query_member(deps.as_ref(), USER3.into(), None).unwrap();
+- ./contracts/cw4-group/src/tests.rs:65:    let members = query_list_members(deps.as_ref(), None, None).unwrap();
+- ./contracts/cw4-group/src/tests.rs:143:    let member1 = query_member(deps.as_ref(), USER1.into(), height).unwrap();
+- ./contracts/cw4-group/src/tests.rs:146:    let member2 = query_member(deps.as_ref(), USER2.into(), height).unwrap();
+- ./contracts/cw4-group/src/tests.rs:149:    let member3 = query_member(deps.as_ref(), USER3.into(), height).unwrap();
+- ./contracts/cw4-group/src/tests.rs:160:        let members = query_list_members(deps.as_ref(), None, None).unwrap();
+- ./contracts/cw4-group/src/tests.rs:163:        let total = query_total_weight(deps.as_ref(), None).unwrap();
+- ./contracts/cw4-group/src/tests.rs:207:    .unwrap();
+- ./contracts/cw4-group/src/tests.rs:238:    .unwrap();
+- ./contracts/cw4-group/src/tests.rs:270:    .unwrap();
+- ./contracts/cw4-group/src/tests.rs:280:    let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-group/src/tests.rs:309:    .unwrap();
+- ./contracts/cw4-group/src/tests.rs:310:    let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-group/src/tests.rs:324:    let _ = execute(deps.as_mut(), mock_env(), admin_info.clone(), add_msg2).unwrap();
+- ./contracts/cw4-group/src/tests.rs:325:    let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-group/src/tests.rs:338:    let _ = execute(deps.as_mut(), mock_env(), admin_info, remove_msg).unwrap();
+- ./contracts/cw4-group/src/tests.rs:339:    let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-group/src/tests.rs:348:    let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-group/src/tests.rs:363:        let _ = execute(deps.as_mut(), mock_env(), admin_info.clone(), msg).unwrap();
+- ./contracts/cw4-group/src/tests.rs:383:    let res = execute(deps.as_mut(), mock_env(), admin_info, msg).unwrap();
+- ./contracts/cw4-group/src/tests.rs:396:    let msg1 = SubMsg::new(hook_msg.clone().into_cosmos_msg(contract1).unwrap());
+- ./contracts/cw4-group/src/tests.rs:397:    let msg2 = SubMsg::new(hook_msg.into_cosmos_msg(contract2).unwrap());
+- ./contracts/cw4-group/src/tests.rs:411:    let total_raw = deps.storage.get(TOTAL_KEY.as_bytes()).unwrap();
+- ./contracts/cw4-group/src/tests.rs:412:    let total: u64 = from_json(total_raw).unwrap();
+- ./contracts/cw4-group/src/tests.rs:416:    let member2_raw = deps.storage.get(&member_key(USER2)).unwrap();
+- ./contracts/cw4-group/src/tests.rs:417:    let member2: u64 = from_json(member2_raw).unwrap();
+- ./contracts/cw4-group/src/tests.rs:433:    let total = query_total_weight(deps.as_ref(), None).unwrap();
+- ./contracts/cw4-group/src/tests.rs:436:    let total = query_total_weight(deps.as_ref(), Some(height)).unwrap();
+- ./contracts/cw4-group/src/tests.rs:439:    let total = query_total_weight(deps.as_ref(), Some(height + 1)).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:408:        instantiate(deps, mock_env(), info, msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:420:        instantiate(deps, mock_env(), info, msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:431:                execute(deps.branch(), env.clone(), info, msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:445:                    msg: to_json_binary(&ReceiveMsg::Bond {}).unwrap(),
+- ./contracts/cw4-stake/src/contract.rs:448:                execute(deps.branch(), env.clone(), info, msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:463:                execute(deps.branch(), env.clone(), info, msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:474:        let res = ADMIN.query_admin(deps.as_ref()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:477:        let res = query_total_weight(deps.as_ref()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:482:        let raw = query(deps, mock_env(), QueryMsg::Member { addr, at_height }).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:483:        let res: MemberResponse = from_json(raw).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:516:            let raw = query(deps, mock_env(), msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:517:            let members: MemberListResponse = from_json(raw).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:520:            let raw = query(deps, mock_env(), QueryMsg::TotalWeight {}).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:521:            let total: TotalWeightResponse = from_json(raw).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:528:        let stake1 = query_staked(deps, USER1.into()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:531:        let stake2 = query_staked(deps, USER2.into()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:534:        let stake3 = query_staked(deps, USER3.into()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:662:        .unwrap();
+- ./contracts/cw4-stake/src/contract.rs:672:                let parsed: Cw20ExecuteMsg = from_json(msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:694:        let total_raw = deps.storage.get(TOTAL_KEY.as_bytes()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:695:        let total: u64 = from_json(total_raw).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:699:        let member2_raw = deps.storage.get(&member_key(USER2)).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:700:        let member2: u64 = from_json(member2_raw).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:709:        CLAIMS.query_claims(deps, addr).unwrap().claims
+- ./contracts/cw4-stake/src/contract.rs:775:        .unwrap();
+- ./contracts/cw4-stake/src/contract.rs:791:        .unwrap();
+- ./contracts/cw4-stake/src/contract.rs:834:        .unwrap();
+- ./contracts/cw4-stake/src/contract.rs:852:        let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:881:        .unwrap();
+- ./contracts/cw4-stake/src/contract.rs:882:        let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:896:        let _ = execute(deps.as_mut(), mock_env(), admin_info.clone(), add_msg2).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:897:        let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:910:        let _ = execute(deps.as_mut(), mock_env(), admin_info, remove_msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:911:        let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:920:        let hooks = HOOKS.query_hooks(deps.as_ref()).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:935:            let _ = execute(deps.as_mut(), mock_env(), admin_info.clone(), msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:941:        let res = execute(deps.as_mut(), mock_env(), info, ExecuteMsg::Bond {}).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:948:        let msg1 = SubMsg::new(hook_msg.clone().into_cosmos_msg(contract1.clone()).unwrap());
+- ./contracts/cw4-stake/src/contract.rs:949:        let msg2 = SubMsg::new(hook_msg.into_cosmos_msg(contract2.clone()).unwrap());
+- ./contracts/cw4-stake/src/contract.rs:957:        let res = execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+- ./contracts/cw4-stake/src/contract.rs:964:        let msg1 = SubMsg::new(hook_msg.clone().into_cosmos_msg(contract1).unwrap());
+- ./contracts/cw4-stake/src/contract.rs:965:        let msg2 = SubMsg::new(hook_msg.into_cosmos_msg(contract2).unwrap());
+- ./contracts/cw4-stake/src/contract.rs:992:        execute(deps.as_mut(), mock_env(), info, ExecuteMsg::Bond {}).unwrap();
+
+## Panic Macros
+- ./contracts/cw20-ics20/src/contract.rs:465:            panic!("Unexpected return message: {:?}", res.messages[0]);
+- ./contracts/cw20-ics20/src/contract.rs:533:            panic!("Unexpected return message: {:?}", res.messages[0]);
+- ./contracts/cw20-ics20/src/contract.rs:669:            panic!("Unexpected return message: {:?}", res.messages[0]);
+- ./contracts/cw20-ics20/src/contract.rs:717:            panic!("Unexpected return message: {:?}", res.messages[0]);
+- ./contracts/cw3-flex-multisig/src/contract.rs:829:            _ => panic!("Wrong variant"),
+- ./contracts/cw4-stake/src/contract.rs:681:            _ => panic!("Must initiate cw20 transfer"),
+
+## Unchecked Arithmetic
+- ./contracts/cw1-subkeys/src/contract.rs:115:                        allowance.balance = allowance.balance.sub(amount.clone())?;
+- ./contracts/cw1-subkeys/src/contract.rs:369:                    Ok(!allow.expires.is_expired(&env.block) && allow.balance.sub(amount).is_ok())</pre>
+    </div>
+    
+    <div class="section">
+      <h2>Schema Generation</h2>
+      <table>
+        <tr>
+          <th>Contract</th>
+          <th>Files</th>
+          <th>Status</th>
+        </tr>
+<tr><td>cw4-group</td><td>1</td><td><span class='success'>Success</span></td></tr>
+<tr><td>cw1-whitelist</td><td>1</td><td><span class='success'>Success</span></td></tr>
+<tr><td>cw3-flex-multisig</td><td>1</td><td><span class='success'>Success</span></td></tr>
+<tr><td>cw20-base</td><td>1</td><td><span class='success'>Success</span></td></tr>
+<tr><td>cw4-stake</td><td>1</td><td><span class='success'>Success</span></td></tr>
+<tr><td>cw1-subkeys</td><td>1</td><td><span class='success'>Success</span></td></tr>
+<tr><td>cw20-ics20</td><td>1</td><td><span class='success'>Success</span></td></tr>
+<tr><td>cw3-fixed-multisig</td><td>1</td><td><span class='success'>Success</span></td></tr>
+      </table>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <p>CosmWasm Static Analysis Report - Generated by GitHub Actions</p>
+    </div>
+  </footer>
+</body>
+</html>
