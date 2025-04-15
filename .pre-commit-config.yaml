@@ -1,0 +1,47 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+      - id: check-merge-conflict
+  
+  - repo: https://github.com/doublify/pre-commit-rust
+    rev: v1.0
+    hooks:
+      - id: fmt
+        name: Rust Format
+        args: ['--all', '--', '--check']
+      - id: clippy
+        name: Rust Clippy
+        args: ['--', '-D', 'warnings', '-A', 'clippy::manual-div-ceil']
+  
+  - repo: local
+    hooks:
+      - id: wasm-lib-check
+        name: Check WASM Library Compilation
+        entry: bash -c 'find ./contracts -name Cargo.toml -print0 | xargs -0 -I {} sh -c "cd $(dirname {}) && echo \"Checking $(basename $(pwd))\" && cargo check --lib --target wasm32-unknown-unknown" || exit 1'
+        language: system
+        pass_filenames: false
+        files: '^contracts/.+/src/.+\.rs$'
+      
+      - id: check-unsafe
+        name: Check for unsafe code
+        entry: | 
+                bash -c 'git diff --cached --name-only | grep "\.rs$" | xargs grep -l "unsafe" || true; if [ "$?" -eq "0" ]; then echo "WARNING: Found unsafe code, make sure it is necessary and well-documented." >&2; fi'
+        language: system
+        pass_filenames: false
+        types: [rust]
+      
+      - id: check-unwrap
+        name: Check for unwrap usage
+        entry: |
+               bash -c 'git diff --cached --name-only | grep "\.rs$" | xargs grep -l "\.unwrap()" || true; if [ "$?" -eq "0" ]; then echo "WARNING: Found unwrap() calls, consider proper error handling instead." >&2; fi'
+        language: system
+        pass_filenames: false
+        types: [rust]

@@ -4,15 +4,16 @@ on:
   pull_request:
   push:
     branches: [main, master, develop]
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.10'
       
@@ -26,7 +27,7 @@ jobs:
           override: true
       
       - name: Cache Rust dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cargo/registry
@@ -38,17 +39,10 @@ jobs:
         run: pip install pre-commit
       
       - name: Cache pre-commit environments
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path: ~/.cache/pre-commit
           key: ${{ runner.os }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
       
       - name: Run pre-commit
         run: pre-commit run --all-files --show-diff-on-failure
-      
-      - name: Annotate failures
-        if: failure()
-        uses: reviewdog/action-suggester@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tool_name: pre-commit

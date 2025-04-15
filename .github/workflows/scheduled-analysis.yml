@@ -407,19 +407,19 @@ jobs:
           EOF
       
       - name: Upload comprehensive report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: comprehensive-report
           path: comprehensive-report/
       
       - name: Upload schemas
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: complete-schemas
           path: schema-output/
       
       - name: Upload statistics and security reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: detailed-reports
           path: reports/

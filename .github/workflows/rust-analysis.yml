@@ -5,6 +5,7 @@ on:
     branches: [ main, master, develop ]
   pull_request:
     branches: [ main, master, develop ]
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   # Format checking
@@ -32,10 +33,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       
       - name: Check code formatting
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
+        run: cargo fmt --all -- --check
   
   # Clippy linting
   clippy:
@@ -76,16 +74,10 @@ jobs:
           grep -r --include="*.rs" -l "(.* + .* - 1) / .*" ./ | xargs -I{} sed -i -E 's/^([^#].*\(.* \+ .* - 1\) \/ .*)/\#\[allow\(clippy::manual_div_ceil\)\]\n\1/' {} || true
       
       - name: Run clippy (default features)
-        uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: -- -D warnings -A clippy::manual-div-ceil
+        run: cargo clippy -- -D warnings -A clippy::manual-div-ceil
       
       - name: Run clippy (all features)
-        uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features -- -D warnings -A clippy::manual-div-ceil
+        run: cargo clippy --all-features -- -D warnings -A clippy::manual-div-ceil
   
   # Security analysis
   security:
@@ -146,7 +138,7 @@ jobs:
           echo "" >> security-reports/report.md
       
       - name: Upload security report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: security-report
           path: security-reports/
@@ -181,7 +173,7 @@ jobs:
             uniq >> dependency-reports/deps.md
       
       - name: Upload dependency report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: dependency-report
           path: dependency-reports/
@@ -224,7 +216,7 @@ jobs:
           ls -la wasm-builds/ > wasm-builds-list.txt
       
       - name: Upload WASM builds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: wasm-builds
           path: wasm-builds/
@@ -283,7 +275,7 @@ jobs:
           ./generate_schemas.sh
       
       - name: Upload schemas
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: json-schemas
           path: schema-output/
@@ -373,7 +365,7 @@ jobs:
           EOF
       
       - name: Upload final report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: analysis-report
           path: analysis-report/
