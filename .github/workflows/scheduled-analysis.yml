@@ -311,9 +311,18 @@ jobs:
           echo "Results available in reports/ and comprehensive-report/ directories"
           
       - name: Deploy report to GitHub Pages
+        id: deployment
         uses: peaceiris/actions-gh-pages@v3
         if: success()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./comprehensive-report
           destination_dir: comprehensive-report
+          
+      - name: Display report URL
+        if: success()
+        run: |
+          echo "=================================================="
+          echo "📊 Comprehensive report published successfully!"
+          echo "📝 Access your report at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/comprehensive-report/"
+          echo "=================================================="

@@ -156,9 +156,18 @@ jobs:
           echo "Report generated successfully at analysis-report/index.html"
           
       - name: Deploy report to GitHub Pages
+        id: deployment
         uses: peaceiris/actions-gh-pages@v3
         if: success() && github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./analysis-report
           destination_dir: static-analysis-report
+          
+      - name: Display report URL
+        if: success() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        run: |
+          echo "=================================================="
+          echo "📊 Report published successfully!"
+          echo "📝 Access your report at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/static-analysis-report/"
+          echo "==================================================" 
